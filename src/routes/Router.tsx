@@ -1,7 +1,8 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Home from "../pages/Home.tsx";
 import Layout from "../layout/Layout";
+import Home from "../pages/Home.tsx";
+import Accordion from "../pages/Accordion.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -11,6 +12,10 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />
+            },
+            {
+                path: "accordion",
+                element: <Accordion />
             }
         ]
     }

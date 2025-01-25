@@ -1,30 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+} from '@mui/material';
+import { Menu as MenuIcon } from '@mui/icons-material';
 
-interface Props {
-  username: string;
-}
-
-const Navbar: React.FC<Props> = ({ username }) => {
+const Navbar: React.FC = () => {
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="navbar-brand">
-           React Practice Projects
-        </Link>
-        <ul className="navbar-links">
-          <li>
-            <Link to="/" className="navbar-link">Inicio</Link>
-           </li>
-           {/* Aquí puedes agregar más enlaces de navegación */}
-          {username ? (
-            <li className="navbar-user">Welcome, {username}</li>
-          ) : (
-            <li><Link to="/login" className="navbar-login">Login</Link></li>
-          )}
-        </ul>
-      </div>
-    </nav>
+    <AppBar>
+      <Toolbar>
+        <Typography variant="h6" component={Link} to="/" style={{ flexGrow: 1 }}>
+          React Practice Projects
+        </Typography>
+        <Button color="inherit" component={Link} to="/">
+          Inicio
+        </Button>
+        <IconButton edge="start" color="inherit" aria-label="home" component={Link} to="/">
+          <MenuIcon />
+        </IconButton>
+        {/* Puedes agregar más enlaces de navegación aquí */}
+      </Toolbar>
+    </AppBar>
   );
 };
 

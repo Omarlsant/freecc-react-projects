@@ -1,28 +1,70 @@
 import React, { useState } from 'react';
 
-interface AccordionProps {
-    title: string;
-    content: string;
-}
+const data = [
+  { id: '1', question: 'Question 1', answer: 'Answer 1' },
+  { id: '2', question: 'Question 2', answer: 'Answer 2' },
+  { id: '3', question: 'Question 3', answer: 'Answer 3' },
+  { id: '4', question: 'Question 4', answer: 'Answer 4' },
+];
 
-const Accordion: React.FC<AccordionProps> = ({ title, content }) => {
-    const [isOpen, setIsOpen] = useState(false);
+export default function Accordion() {
+  const [selected, setSelected] = useState(null);
+  const [enableMultiSelection, setEnableMultiSelection] = useState(false);
+  const [multiple, setMultiple] = useState<string[]>([]);
 
-    const toggleAccordion = () => {
-        setIsOpen(!isOpen);
-    };
+  function handleSingleSelection(getCurrentId) {
+    setSelected(getCurrentId === selected ? null : getCurrentId);
+  }
 
-    return (
-        <div className="accordion">
-            <div className="accordion-header" onClick={toggleAccordion}>
-                <span className="accordion-title">{title}</span>
-                <span className={`accordion-icon ${isOpen ? 'open' : 'closed'}`}>
-                    {isOpen ? '-' : '+'}
-                </span>
+  function handleMultipleSelection(getCurrentId) {
+    let cpyMultiple = [...multiple];
+    const findIndexOfCurrentId = cpyMultiple.indexOf(getCurrentId);
+    if (findIndexOfCurrentId === -1) {
+      cpyMultiple.push(getCurrentId);
+    } else {
+      cpyMultiple.splice(findIndexOfCurrentId, 1);
+    }
+    setMultiple(cpyMultiple);
+  }
+
+  console.log(selected, multiple);
+
+  return (
+    <div className='wrapper'>
+      <button onClick={() => setEnableMultiSelection(!enableMultiSelection)}>
+        Enable multi selection
+      </button>
+      <div className='accordion'>
+        {data && data.length > 0 ? (
+          data.map((dataItem) => (
+            <div className='item' key={dataItem.id}>
+              <div
+                onClick={
+                  enableMultiSelection
+                    ? () => handleMultipleSelection(dataItem.id)
+                    : () => handleSingleSelection(dataItem.id)
+                }
+                className='title'
+              >
+                <h3>{dataItem.question}</h3>
+                <span>+</span>
+              </div>
+              {/* Renderizado condicional simplificado */}
+              {enableMultiSelection ? (
+                multiple.includes(dataItem.id) && (
+                  <div className='content'>{dataItem.answer}</div>
+                )
+              ) : (
+                selected === dataItem.id && (
+                  <div className='content'>{dataItem.answer}</div>
+                )
+              )}
             </div>
-            {isOpen && <div className="accordion-content">{content}</div>}
-        </div>
-    );
-};
-
-export default Accordion;
+          ))
+        ) : (
+          <div>No data available</div>
+        )}
+      </div>
+    </div>
+  );
+}

@@ -1,68 +1,318 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* ==========================================
+   Estilos Globales y Variables
+   ========================================== */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+   :root {
+    --primary-color: #3498db; /* Un azul vibrante */
+    --secondary-color: #2c3e50; /* Un gris oscuro para contrastar */
+    --light-bg: #ecf0f1; /* Un gris muy claro para fondos */
+    --text-color: #333; /* Texto principal */
+    --white: #fff; /* Blanco puro */
+    --hover-color: #45a049; /* Verde para interacciones */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+    --transition-duration: 0.3s;
+    --box-shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--light-bg); /* Fondo general */
+    color: var(--text-color);
+    line-height: 1.6;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+a {
+    text-decoration: none;
+    color: inherit; /* Hereda el color del texto del padre (importante en navbar)*/
+
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* ==========================================
+   Estilos del Navbar
+   ========================================== */
+.navbar {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    box-shadow: var(--box-shadow-light);
+
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 60px;
+
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--white);
+    transition: color var(--transition-duration) ease;
+    text-decoration: none;
+
+}
+
+.navbar-brand:hover {
+    color: var(--hover-color); /* Cambia el color al hacer hover*/
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-link {
+    color: var(--white);
+    font-weight: bold;
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    transition: background-color var(--transition-duration) ease;
+    text-decoration: none;
+    margin-left: 1.5rem;
+}
+
+
+.navbar-link:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Un fondo translúcido al pasar el ratón */
+}
+
+.navbar-menu-icon {
+    display: none; /* Oculto por defecto */
+}
+
+.navbar-link-menu {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all var(--transition-duration) ease;
+}
+
+.navbar-link-menu:hover {
+    background-color: var(--light-bg);
+}
+
+
+/* ==========================================
+   Estilos del Footer
+   ========================================== */
+.footer {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-top: 4rem;
+    box-shadow: var(--box-shadow-light);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.footer-links li {
+    margin: 0 1rem;
+}
+
+.footer-links li a {
+    color: var(--white);
+    font-weight: bold;
+    transition: color var(--transition-duration) ease;
+}
+
+.footer-links li a:hover {
+    color: var(--hover-color);
+}
+
+
+.footer p {
+    margin: 0;
+}
+
+/* ==========================================
+   Estilos de la página Home
+   ========================================== */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.home-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    text-align: center;
+    font-weight: 700;
+}
+
+
+.home-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 95%;
+    max-width: 1200px;
+    justify-content: center;
+}
+
+.home-link {
+    display: block;
+    padding: 1.2rem 1.5rem;
+    background-color: var(--white);
+    color: var(--text-color);
+    text-align: center;
+    border-radius: 8px;
+    transition: all var(--transition-duration) ease;
+    box-shadow: var(--box-shadow-light);
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.home-link:hover {
+    background-color: var(--light-bg);
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-medium);
+}
+
+/* ==========================================
+   Estilos del Acordeón
+   ========================================== */
+.wrapper {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wrapper button {
+    padding: 0.8rem 1.6rem;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: background-color var(--transition-duration) ease;
+}
+
+.wrapper button:hover {
+    background-color: var(--hover-color)
+}
+
+.accordion {
+    width: 500px;
+}
+
+.item {
+    background-color: var(--primary-color);
+    margin-bottom: 0.6rem;
+    padding: 1.2rem 1.8rem;
+    border-radius: 8px;
+    transition: background-color var(--transition-duration) ease;
+}
+
+.item:hover {
+    background-color: var(--hover-color);
+}
+
+.title {
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.content {
+    color: var(--white);
+    padding-top: 0.6rem;
+}
+
+/* ==========================================
+   Ajustes Responsive
+   ========================================== */
+@media (max-width: 768px) {
+    .home-links {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        width: 100%;
+    }
+    .home-title {
+        font-size: 1.8rem;
+    }
+
+    .navbar-container, .footer-container {
+        padding: 0 10px; /* Reducir el padding en pantallas pequeñas */
+    }
+    .navbar-links li {
+        margin-left: 10px; /* Reducir el espacio entre los links */
+    }
+    .wrapper {
+        padding: 1rem;
+        gap: 10px;
+        height: auto;
+    }
+    .accordion {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar-links li {
+        margin-left: 8px; /* Reducir aún más el espacio en pantallas muy pequeñas*/
+    }
+
+    .home-links {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+
+    }
+
+    .home-link {
+        padding: 1rem;
+        font-size: 1rem;
+
+    }
+
+    .wrapper {
+        padding: 0.5rem;
+    }
+
+    .item {
+        padding: 1rem 1.2rem;
+    }
+
+    .wrapper button {
+        font-size: 1rem
+    }
+
 }

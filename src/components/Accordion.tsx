@@ -8,61 +8,63 @@ const data = [
 ];
 
 export default function Accordion() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<string | null>(null);
   const [enableMultiSelection, setEnableMultiSelection] = useState(false);
   const [multiple, setMultiple] = useState<string[]>([]);
 
-  function handleSingleSelection(getCurrentId) {
+  const handleSingleSelection = (getCurrentId: string) => {
     setSelected(getCurrentId === selected ? null : getCurrentId);
-  }
+  };
 
-  function handleMultipleSelection(getCurrentId) {
-    let cpyMultiple = [...multiple];
-    const findIndexOfCurrentId = cpyMultiple.indexOf(getCurrentId);
-    if (findIndexOfCurrentId === -1) {
-      cpyMultiple.push(getCurrentId);
-    } else {
-      cpyMultiple.splice(findIndexOfCurrentId, 1);
-    }
-    setMultiple(cpyMultiple);
-  }
+  const handleMultipleSelection = (getCurrentId: string) => {
+    setMultiple((prevMultiple) => {
+      if (prevMultiple.includes(getCurrentId)) {
+          return prevMultiple.filter(id => id !== getCurrentId)
+      } else {
+        return [...prevMultiple, getCurrentId]
+      }
+    });
+  };
 
   console.log(selected, multiple);
 
   return (
-    <div className='wrapper'>
-      <button onClick={() => setEnableMultiSelection(!enableMultiSelection)}>
-        Enable multi selection
+    <div className="container mx-auto p-4">
+      <button
+        onClick={() => setEnableMultiSelection(!enableMultiSelection)}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
+      >
+        {enableMultiSelection ? "Disable multi selection" : "Enable multi selection"}
       </button>
-      <div className='accordion'>
+      <div className="space-y-2">
         {data && data.length > 0 ? (
           data.map((dataItem) => (
-            <div className='item' key={dataItem.id}>
+            <div key={dataItem.id} className="bg-white rounded shadow-md">
               <div
                 onClick={
                   enableMultiSelection
                     ? () => handleMultipleSelection(dataItem.id)
                     : () => handleSingleSelection(dataItem.id)
                 }
-                className='title'
+                className="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-100"
               >
-                <h3>{dataItem.question}</h3>
-                <span>+</span>
+                <h3 className="text-lg font-semibold">{dataItem.question}</h3>
+                <span className="text-gray-500 text-xl">+</span>
               </div>
               {/* Renderizado condicional simplificado */}
               {enableMultiSelection ? (
                 multiple.includes(dataItem.id) && (
-                  <div className='content'>{dataItem.answer}</div>
+                  <div className="p-4 bg-gray-50 border-t border-gray-200">{dataItem.answer}</div>
                 )
               ) : (
                 selected === dataItem.id && (
-                  <div className='content'>{dataItem.answer}</div>
+                  <div className="p-4 bg-gray-50 border-t border-gray-200">{dataItem.answer}</div>
                 )
               )}
             </div>
           ))
         ) : (
-          <div>No data available</div>
+          <div className="text-gray-500">No data available</div>
         )}
       </div>
     </div>

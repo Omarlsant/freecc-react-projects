@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const data = [
-  { id: '1', question: 'Question 1', answer: 'Answer 1' },
-  { id: '2', question: 'Question 2', answer: 'Answer 2' },
-  { id: '3', question: 'Question 3', answer: 'Answer 3' },
-  { id: '4', question: 'Question 4', answer: 'Answer 4' },
+  { id: "1", question: "Question 1", answer: "Answer 1" },
+  { id: "2", question: "Question 2", answer: "Answer 2" },
+  { id: "3", question: "Question 3", answer: "Answer 3" },
+  { id: "4", question: "Question 4", answer: "Answer 4" },
 ];
 
 export default function Accordion() {
@@ -19,9 +19,9 @@ export default function Accordion() {
   const handleMultipleSelection = (getCurrentId: string) => {
     setMultiple((prevMultiple) => {
       if (prevMultiple.includes(getCurrentId)) {
-          return prevMultiple.filter(id => id !== getCurrentId)
+        return prevMultiple.filter((id) => id !== getCurrentId);
       } else {
-        return [...prevMultiple, getCurrentId]
+        return [...prevMultiple, getCurrentId];
       }
     });
   };
@@ -34,7 +34,9 @@ export default function Accordion() {
         onClick={() => setEnableMultiSelection(!enableMultiSelection)}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
       >
-        {enableMultiSelection ? "Disable multi selection" : "Enable multi selection"}
+        {enableMultiSelection
+          ? "Disable multi selection"
+          : "Enable multi selection"}
       </button>
       <div className="space-y-2">
         {data && data.length > 0 ? (
@@ -51,16 +53,17 @@ export default function Accordion() {
                 <h3 className="text-lg font-semibold">{dataItem.question}</h3>
                 <span className="text-gray-500 text-xl">+</span>
               </div>
-              {/* Renderizado condicional simplificado */}
-              {enableMultiSelection ? (
-                multiple.includes(dataItem.id) && (
-                  <div className="p-4 bg-gray-50 border-t border-gray-200">{dataItem.answer}</div>
-                )
-              ) : (
-                selected === dataItem.id && (
-                  <div className="p-4 bg-gray-50 border-t border-gray-200">{dataItem.answer}</div>
-                )
-              )}
+              {enableMultiSelection
+                ? multiple.includes(dataItem.id) && (
+                    <div className="p-4 bg-gray-50 border-t border-gray-200">
+                      {dataItem.answer}
+                    </div>
+                  )
+                : selected === dataItem.id && (
+                    <div className="p-4 bg-gray-50 border-t border-gray-200">
+                      {dataItem.answer}
+                    </div>
+                  )}
             </div>
           ))
         ) : (

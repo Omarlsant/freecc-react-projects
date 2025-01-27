@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Home: React.FC = () => {
   const projects = [
     { name: "Accordion", path: "/accordion" },
-    // { name: "Random Color Generator", path: "/random-color-generator" },
+    { name: "Random Color Generator", path: "/random-color" }
     // { name: "Star Rating", path: "/star-rating" },
     // { name: "Image Slider", path: "/image-slider" },
     // { name: "Load More Button", path: "/load-more-button" },

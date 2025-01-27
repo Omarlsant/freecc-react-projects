@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "../layout/Layout";
 import Home from "../pages/Home.tsx";
 import AccordionPage from "../pages/AccordionPage.tsx";
+import RandomColorPage from "../pages/RandomColorPage.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
             {
                 path: "accordion",
                 element: <AccordionPage />
+            },
+            {
+                path: "random-color",
+                element: <RandomColorPage />
             }
         ]
     }
